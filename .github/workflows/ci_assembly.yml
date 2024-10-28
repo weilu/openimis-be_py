@@ -53,11 +53,11 @@ jobs:
           cluster.name: my_opensearch_local
           http.port: 9200
           plugins.security.ssl.http.enabled: false
-      options: >-
-        --health-cmd "curl -f http://localhost:9200/_cluster/health || exit 1"
-        --health-interval 10s
-        --health-timeout 5s
-        --health-retries 5
+        options: >-
+          --health-cmd "curl -f http://localhost:9200/_cluster/health || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - uses: actions/checkout@v2
 
