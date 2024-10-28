@@ -55,7 +55,7 @@ jobs:
           plugins.security.ssl.http.enabled: false
           OPENSEARCH_INITIAL_ADMIN_PASSWORD: B9wc9VrqX7pY
         options: >-
-          --health-cmd "curl -f http://localhost:9200/_cluster/health || exit 1"
+          --health-cmd "curl -f -u admin:${OPENSEARCH_INITIAL_ADMIN_PASSWORD} http://localhost:9200/_cluster/health || exit 1"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 10
