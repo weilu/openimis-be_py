@@ -53,8 +53,6 @@ jobs:
           cluster.name: my_opensearch_local
           http.port: 9200
           plugins.security.ssl.http.enabled: false
-          plugins.security.disabled: true
-
     steps:
       - uses: actions/checkout@v2
 
@@ -196,3 +194,5 @@ jobs:
           SITE_ROOT: api
           #REMOTE_USER_AUTHENTICATION: False
           CI_EXCLUDED_MODULE: ${{ vars.CI_EXCLUDED_MODULE }}
+          OPENSEARCH_ADMIN: admin
+          OPENSEARCH_PASSWORD: admin

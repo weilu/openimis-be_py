@@ -133,7 +133,6 @@ jobs:
           cluster.name: my_opensearch_local
           http.port: 9200
           plugins.security.ssl.http.enabled: false
-          plugins.security.disabled: true
 
       mssql:
         image: mcr.microsoft.com/mssql/server:2017-latest
@@ -255,7 +254,7 @@ jobs:
           cluster.name: my_opensearch_local
           http.port: 9200
           plugins.security.ssl.http.enabled: false
-          plugins.security.disabled: true
+          
 
       pgsql:
         image: postgres
@@ -372,7 +371,7 @@ jobs:
           cluster.name: my_opensearch_local
           http.port: 9200
           plugins.security.ssl.http.enabled: false
-          plugins.security.disabled: true
+          
 
       pgsql:
         image: postgres
