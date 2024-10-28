@@ -134,6 +134,11 @@ jobs:
           http.port: 9200
           plugins.security.ssl.http.enabled: false
           OPENSEARCH_INITIAL_ADMIN_PASSWORD: B9wc9VrqX7pY
+        options: >-
+          --health-cmd "curl -f -u admin:${OPENSEARCH_INITIAL_ADMIN_PASSWORD} http://localhost:9200/_cluster/health || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
 
       mssql:
         image: mcr.microsoft.com/mssql/server:2017-latest
@@ -256,6 +261,11 @@ jobs:
           http.port: 9200
           plugins.security.ssl.http.enabled: false
           OPENSEARCH_INITIAL_ADMIN_PASSWORD: B9wc9VrqX7pY
+        options: >-
+          --health-cmd "curl -f -u admin:${OPENSEARCH_INITIAL_ADMIN_PASSWORD} http://localhost:9200/_cluster/health || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
           
 
       pgsql:
@@ -360,8 +370,8 @@ jobs:
           OPENSEARCH_ADMIN: admin
           OPENSEARCH_PASSWORD: B9wc9VrqX7pY
           OPEN_SEARCH_HTTP_PORT: 9200
-          OPENSEARCH_HOST: opensearch
-          OPENSEARCH_HOSTS: "http://opensearch:9200"
+          OPENSEARCH_HOST: localhost
+          OPENSEARCH_HOSTS: "http://localhost:9200"
   ci_module_psql_test:
     name: Run All Tests (PSQL)
     runs-on: ubuntu-20.04
@@ -377,6 +387,11 @@ jobs:
           http.port: 9200
           plugins.security.ssl.http.enabled: false
           OPENSEARCH_INITIAL_ADMIN_PASSWORD: B9wc9VrqX7pY
+        options: >-
+          --health-cmd "curl -f -u admin:${OPENSEARCH_INITIAL_ADMIN_PASSWORD} http://localhost:9200/_cluster/health || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
           
 
       pgsql:
@@ -480,8 +495,8 @@ jobs:
           OPENSEARCH_ADMIN: admin
           OPENSEARCH_PASSWORD: B9wc9VrqX7pY
           OPEN_SEARCH_HTTP_PORT: 9200
-          OPENSEARCH_HOST: opensearch
-          OPENSEARCH_HOSTS: "http://opensearch:9200"
+          OPENSEARCH_HOST: localhost
+          OPENSEARCH_HOSTS: "http://localhost:9200"
       - name: Generate Coverage Report
         if: always()
         working-directory: ./openimis/openIMIS
