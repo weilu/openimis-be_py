@@ -124,6 +124,22 @@ jobs:
     runs-on: ubuntu-20.04
     needs: build_backend
     services:
+      opensearch:
+        image: opensearchproject/opensearch:latest
+        ports:
+          - 9200:9200
+        env:
+          discovery.type: single-node
+          cluster.name: my_opensearch_local
+          http.port: 9200
+          plugins.security.ssl.http.enabled: false
+          OPENSEARCH_INITIAL_ADMIN_PASSWORD: B9wc9VrqX7pY
+        options: >-
+          --health-cmd "curl -f -u admin:${OPENSEARCH_INITIAL_ADMIN_PASSWORD} http://localhost:9200/_cluster/health || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+
       mssql:
         image: mcr.microsoft.com/mssql/server:2017-latest
         env:
@@ -228,11 +244,30 @@ jobs:
           #REMOTE_USER_AUTHENTICATION: False
           CI_EXCLUDED_MODULE: ${{ vars.CI_EXCLUDED_MODULE }}
           MODE: DEV
+          OPENSEARCH_ADMIN: admin
+          OPENSEARCH_PASSWORD: B9wc9VrqX7pY
   ci_module_psql_test_module_only:
     name: Run Module Tests (PSQL)
     runs-on: ubuntu-20.04
     needs: build_backend
     services:
+      opensearch:
+        image: opensearchproject/opensearch:latest
+        ports:
+          - 9200:9200
+        env:
+          discovery.type: single-node
+          cluster.name: my_opensearch_local
+          http.port: 9200
+          plugins.security.ssl.http.enabled: false
+          OPENSEARCH_INITIAL_ADMIN_PASSWORD: B9wc9VrqX7pY
+        options: >-
+          --health-cmd "curl -f -u admin:${OPENSEARCH_INITIAL_ADMIN_PASSWORD} http://localhost:9200/_cluster/health || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+          
+
       pgsql:
         image: postgres
         env:
@@ -332,11 +367,33 @@ jobs:
           SITE_ROOT: api
           CI_EXCLUDED_MODULE: ${{ vars.CI_EXCLUDED_MODULE }}
           MODE: DEV
+          OPENSEARCH_ADMIN: admin
+          OPENSEARCH_PASSWORD: B9wc9VrqX7pY
+          OPEN_SEARCH_HTTP_PORT: 9200
+          OPENSEARCH_HOST: localhost
+          OPENSEARCH_HOSTS: "http://localhost:9200"
   ci_module_psql_test:
     name: Run All Tests (PSQL)
     runs-on: ubuntu-20.04
     needs: build_backend
     services:
+      opensearch:
+        image: opensearchproject/opensearch:latest
+        ports:
+          - 9200:9200
+        env:
+          discovery.type: single-node
+          cluster.name: my_opensearch_local
+          http.port: 9200
+          plugins.security.ssl.http.enabled: false
+          OPENSEARCH_INITIAL_ADMIN_PASSWORD: B9wc9VrqX7pY
+        options: >-
+          --health-cmd "curl -f -u admin:${OPENSEARCH_INITIAL_ADMIN_PASSWORD} http://localhost:9200/_cluster/health || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+          
+
       pgsql:
         image: postgres
         env:
@@ -435,6 +492,11 @@ jobs:
           SITE_ROOT: api
           CI_EXCLUDED_MODULE: ${{ vars.CI_EXCLUDED_MODULE }}
           MODE: DEV
+          OPENSEARCH_ADMIN: admin
+          OPENSEARCH_PASSWORD: B9wc9VrqX7pY
+          OPEN_SEARCH_HTTP_PORT: 9200
+          OPENSEARCH_HOST: localhost
+          OPENSEARCH_HOSTS: "http://localhost:9200"
       - name: Generate Coverage Report
         if: always()
         working-directory: ./openimis/openIMIS
@@ -492,7 +554,7 @@ jobs:
           # Flake8 Report
           export MODULE_NAME="$(echo $GITHUB_REPOSITORY | sed 's#^openimis/openimis-be-\(.*\)_py$#\1#')"
           MOD_DIR="../current-module/$MODULE_NAME"
-          python -m flake8 --output-file=flake8-report.txt $MOD_DIR --exit-zero
+          python -m flake8 --output-file=flake8-report.txt $MOD_DIR --exit-zero --ignore W503
           sed -i 's|\.\./current-module/||g' flake8-report.txt
           
           python -m flake8 $MOD_DIR
