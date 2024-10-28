@@ -359,7 +359,7 @@ jobs:
           OPENSEARCH_PASSWORD: admin
           OPEN_SEARCH_HTTP_PORT: 9200
           OPENSEARCH_HOST: opensearch
-          OPENSEARCH_HOSTS: http://opensearch:9200
+          OPENSEARCH_HOSTS: "http://opensearch:9200"
   ci_module_psql_test:
     name: Run All Tests (PSQL)
     runs-on: ubuntu-20.04
@@ -478,7 +478,7 @@ jobs:
           OPENSEARCH_PASSWORD: admin
           OPEN_SEARCH_HTTP_PORT: 9200
           OPENSEARCH_HOST: opensearch
-          OPENSEARCH_HOSTS: http://opensearch:9200
+          OPENSEARCH_HOSTS: "http://opensearch:9200"
       - name: Generate Coverage Report
         if: always()
         working-directory: ./openimis/openIMIS

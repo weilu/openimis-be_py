@@ -159,8 +159,8 @@ jobs:
           SECRET_KEY: secret
           MODE: DEV
           DB_DEFAULT: postgresql
-          CELERY_BROKER_URL": "memory://openIMIS-test//"
-          CELERY_RESULT_BACKEND": "cache+memory://openIMIS-test//"
+          CELERY_BROKER_URL: "memory://openIMIS-test//"
+          CELERY_RESULT_BACKEND: "cache+memory://openIMIS-test//"
           #DJANGO_SETTINGS_MODULE: hat.settings
           DB_HOST: localhost
           DB_PORT: 5432
@@ -174,7 +174,7 @@ jobs:
           OPENSEARCH_PASSWORD: admin
           OPEN_SEARCH_HTTP_PORT: 9200
           OPENSEARCH_HOST: opensearch
-          OPENSEARCH_HOSTS: http://opensearch:9200
+          OPENSEARCH_HOSTS: "http://opensearch:9200"
 
       - name: Django tests MSSQL
         working-directory: ./openIMIS
@@ -190,8 +190,8 @@ jobs:
           SECRET_KEY: secret
           MODE: DEV
           DB_DEFAULT: mssql
-          CELERY_BROKER_URL": "memory://openIMIS-test//"
-          CELERY_RESULT_BACKEND": "cache+memory://openIMIS-test//"
+          CELERY_BROKER_URL: "memory://openIMIS-test//"
+          CELERY_RESULT_BACKEND: "cache+memory://openIMIS-test//"
           #DJANGO_SETTINGS_MODULE: hat.settings
           DB_HOST: localhost
           DB_PORT: 1433
@@ -206,4 +206,4 @@ jobs:
           OPENSEARCH_PASSWORD: admin
           OPEN_SEARCH_HTTP_PORT: 9200
           OPENSEARCH_HOST: opensearch
-          OPENSEARCH_HOSTS: http://opensearch:9200
+          OPENSEARCH_HOSTS: "http://opensearch:9200"
