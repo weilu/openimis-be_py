@@ -23,7 +23,7 @@
 | PHOTO_ROOT_PATH | String | Define the path for the photos of insurees. This setting is used in the Insuree module. The value set here will be overwritten by the InsureeConfig file. |
 | DJANGO_MIGRATE | True, False | Based on the value set, application runs the migration command before starting up. If the SITE_ROOT value is set to api then the migration will always run regardless of the value |
 | SCHEDULER_AUTOSTART | True, False | All the modules will be searched for the scheduled tasks, if the value is set to True |
-| OPENSEARCH_HOST | String | Define the opensearch host |
+| OPENSEARCH_HOSTS | String | Define the opensearch hosts, comma separated http://opensearch:9200 |
 | OPENSEARCH_ADMIN | String | Define the login name for open search |
 | OPENSEARCH_PASSWORD | String | Define the admin password to login to open search |
 | BE_BRANCH | String | Define the github branch for the Backend form which you wan to install the module. Default is develop. |
