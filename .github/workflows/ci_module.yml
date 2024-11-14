@@ -346,7 +346,7 @@ jobs:
           echo 'set search_path to public' >> ~/.psqlrc
           PGPASSWORD=GitHub999 psql -U $DB_USER -h $DB_HOST -c "DROP DATABASE IF EXISTS \"$DB_NAME_TEST\";"
           PGPASSWORD=GitHub999 psql -U $DB_USER -h $DB_HOST -c "CREATE DATABASE \"$DB_NAME_TEST\";"
-
+          PGPASSWORD=GitHub999 psql -U $DB_USER -h $DB_HOST -d $DB_NAME_TEST -f  ./sql_psql/database\ scripts/json_schema_extension.sql | grep . | uniq -c
           PGPASSWORD=GitHub999 psql -U $DB_USER -h $DB_HOST -d $DB_NAME_TEST -f  ./sql_psql/database\ scripts/00_dump.sql | grep . | uniq -c
           PGPASSWORD=GitHub999 psql -U $DB_USER -h $DB_HOST -d $DB_NAME_TEST -f  ./sql_psql/database\ scripts/02_aux_functions.sql | grep . | uniq -c
           PGPASSWORD=GitHub999 psql -U $DB_USER -h $DB_HOST -d $DB_NAME_TEST -f  ./sql_psql/database\ scripts/03_views.sql | grep . | uniq -c
@@ -470,7 +470,7 @@ jobs:
           echo 'set search_path to public' >> ~/.psqlrc
           PGPASSWORD=GitHub999 psql -U $DB_USER -h $DB_HOST -c "DROP DATABASE IF EXISTS \"$DB_NAME_TEST\";"
           PGPASSWORD=GitHub999 psql -U $DB_USER -h $DB_HOST -c "CREATE DATABASE \"$DB_NAME_TEST\";"
-          
+          PGPASSWORD=GitHub999 psql -U $DB_USER -h $DB_HOST -d $DB_NAME_TEST -f  ./sql_psql/database\ scripts/json_schema_extension.sql | grep . | uniq -c
           PGPASSWORD=GitHub999 psql -U $DB_USER -h $DB_HOST -d $DB_NAME_TEST -f  ./sql_psql/database\ scripts/00_dump.sql | grep . | uniq -c
           PGPASSWORD=GitHub999 psql -U $DB_USER -h $DB_HOST -d $DB_NAME_TEST -f  ./sql_psql/database\ scripts/02_aux_functions.sql | grep . | uniq -c
           PGPASSWORD=GitHub999 psql -U $DB_USER -h $DB_HOST -d $DB_NAME_TEST -f  ./sql_psql/database\ scripts/03_views.sql | grep . | uniq -c
