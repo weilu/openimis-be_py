@@ -21,11 +21,13 @@
         "product",
         "insuree",
         "policy",
+        "calcrule_validations",
         "contribution",
         "payer",
         "payment",
         "claim",
         "claim_batch",
+        "claim_sampling",
         "tools",
         "api_fhir_r4",
         "calculation",
@@ -53,7 +55,7 @@
       "id": "dbEngine",
       "type": "pickString",
       "description": "provide DB engine to use",
-      "options": ["MSSQL", "PSQL"]
+      "options": ["mssql", "psql"]
     }
   ],
   "configurations": [
@@ -144,7 +146,7 @@
       "type": "python",
       "request": "launch",
       "program": "${workspaceFolder}/openIMIS/manage.py",
-      "args": ["makemigrationsy"],
+      "args": ["makemigrations"],
       "django": true,
       "cwd": "${workspaceRoot}/openIMIS",
       "env": {
@@ -195,6 +197,7 @@
         "api_fhir_r4",
         "calculation",
         "contribution_plan",
+        "claim_sampling",
         "policyholder",
         "contract",
         "invoice",
@@ -211,6 +214,7 @@
         "opensearch_reports",
         "payment_cycle",
         "calcrule_social_protection",
+        "calcrule_validations",
         "payroll"
       ],
       "django": true,
@@ -241,6 +245,27 @@
         "CELERY_RESULT_BACKEND": "cache+memory://openIMIS-test//"
       },
       "justMyCode": false
+    },    {
+      "name": "Test module (just my code)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/openIMIS/manage.py",
+      "args": [
+        "test",
+        "--keepdb",
+        "--debug-mode",
+        "--timing",
+        "${input:moduleName}"
+      ],
+      "django": true,
+      "cwd": "${workspaceRoot}/openIMIS",
+      "env": {
+        "DB_DEFAULT": "${input:dbEngine}",
+        //"ASYNC": "PROD",
+        "CELERY_BROKER_URL": "memory://openIMIS-test//",
+        "CELERY_RESULT_BACKEND": "cache+memory://openIMIS-test//"
+      },
+      "justMyCode": true
     },
     {
       "name": "Python: Celery Workers",
